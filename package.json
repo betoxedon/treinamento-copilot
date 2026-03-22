@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "tsx server.ts",
+    "dev": "nodemon --watch server.ts --watch src --ext ts --exec \"tsx server.ts\"",
+    "lint": "eslint .",
     "test": "jest --coverage"
   },
   "keywords": [],
@@ -12,15 +13,20 @@
   "license": "ISC",
   "dependencies": {
     "express": "^5.2.1",
+    "sqlite3": "^5.1.7",
     "typescript": "^5.9.3"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@types/express": "^5.0.6",
     "@types/jest": "^29.5.14",
     "@types/supertest": "^6.0.3",
+    "eslint": "^10.1.0",
     "jest": "^30.3.0",
+    "nodemon": "^3.1.10",
     "supertest": "^7.0.0",
     "ts-jest": "^29.3.4",
-    "tsx": "^4.19.4"
+    "tsx": "^4.19.4",
+    "typescript-eslint": "^8.57.1"
   }
 }

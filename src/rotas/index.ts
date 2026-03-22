@@ -5,7 +5,10 @@
  * e ser registrado aqui via `router.use()`.
  */
 import { Router } from 'express';
+import roteadorCotacoes from './cotacoes';
 
 const roteador = Router();
+
+roteador.use('/cotacoes', roteadorCotacoes);
 
 export default roteador;

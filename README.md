@@ -9,6 +9,8 @@ Este repositório demonstra como criar e configurar **agentes de IA especializad
 - ✅ Agentes customizados para diferentes domínios (documentação, QA, testes, Git)
 - ✅ Convenções de código em português do Brasil
 - ✅ Testes automatizados com cobertura de 100%
+- ✅ Persistência local com SQLite para histórico de consultas
+- ✅ Integração com API externa de cotações
 - ✅ Boas práticas de desenvolvimento com GitHub Copilot
 
 O projeto é voltado para **desenvolvedores** que desejam entender como implementar agentes de IA para melhorar produtividade e qualidade do código.
@@ -22,7 +24,7 @@ O projeto é voltado para **desenvolvedores** que desejam entender como implemen
 | Node.js | 18.x ou superior |
 | npm | 9.x ou superior |
 
-Não há dependência de banco de dados ou serviços externos.
+É necessário acesso à internet para consultar a API externa de cotações.
 
 ---
 
@@ -42,7 +44,7 @@ npm run dev
 
 O servidor inicia na porta **3000**. Acesse em: `http://localhost:3000`
 
-> O script `dev` utiliza `tsx` para executar o TypeScript diretamente, sem etapa de compilação.
+> O script `dev` utiliza `nodemon` + `tsx`, com recarga automática ao alterar arquivos `.ts`.
 
 ---
 
@@ -77,6 +79,7 @@ treinamento_copilot/
 │   ├── servicos/        # Lógica de negócio (independente do Express)
 │   ├── middlewares/     # Middlewares reutilizáveis (auth, validação, erros)
 │   └── tipos/           # Interfaces e tipos TypeScript compartilhados
+├── data/                # Banco SQLite local (gerado automaticamente)
 ├── server.ts            # Ponto de entrada: configura e sobe o servidor Express
 ├── server.spec.ts       # Testes automatizados do servidor (supertest + Jest)
 ├── jest.config.ts       # Configuração do Jest (ts-jest, cobertura, thresholds)
@@ -92,6 +95,8 @@ treinamento_copilot/
 | Método | Caminho | Descrição | Exemplo de resposta |
 |---|---|---|---|
 | `GET` | `/` | Retorna mensagem de boas-vindas | `{ "mensagem": "Bem-vindo ao servidor!" }` |
+| `GET` | `/api/cotacoes` | Consulta cotações na API externa (br.dolarapi.com) e persiste no SQLite local a data/hora e o JSON completo da resposta | `{ "mensagem": "Cotacoes consultadas com sucesso.", "dados": [...] }` |
+| `GET` | `/api/cotacoes/consultas` | Lista o histórico de consultas registradas no banco local, incluindo `id`, `dataHoraConsulta` e `resultadoConsulta` (JSON completo retornado pela API externa) | `{ "mensagem": "Consultas listadas com sucesso.", "dados": [{ "id": 1, "dataHoraConsulta": "2026-03-22T15:10:00.000Z", "resultadoConsulta": [...] }] }` |
 
 ---
 

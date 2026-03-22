@@ -5,11 +5,13 @@
  * em português do Brasil.
  */
 import express from 'express';
+import roteador from './src/rotas';
 
 const app = express();
 const PORTA = 3000;
 
 app.use(express.json());
+app.use('/api', roteador);
 
 /**
  * GET /
