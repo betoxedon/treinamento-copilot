@@ -7,6 +7,10 @@
 import { Router } from 'express';
 import roteadorCotacoes from './cotacoes';
 
+/**
+ * Roteador principal da API.
+ * Agrega todos os sub-roteadores de dominio registrados em `/api`.
+ */
 const roteador = Router();
 
 roteador.use('/cotacoes', roteadorCotacoes);

@@ -13,7 +13,8 @@ const URL_BASE_COTACOES = 'https://br.dolarapi.com/v1/cotacoes';
  *
  * @param _requisicao - Requisicao HTTP (nao utilizada no momento).
  * @param resposta - Resposta HTTP do Express.
- * @returns `Promise<void>`
+ * @returns `Promise<void>` — envia resposta JSON com `{ mensagem, dados }` em caso de sucesso,
+ *   ou `{ mensagem }` com status 502 em falha na API externa, ou 500 em falha ao persistir.
  */
 const consultarCotacoes = async (_requisicao: Request, resposta: Response): Promise<void> => {
     try {
@@ -47,7 +48,8 @@ const consultarCotacoes = async (_requisicao: Request, resposta: Response): Prom
  *
  * @param _requisicao - Requisicao HTTP (nao utilizada no momento).
  * @param resposta - Resposta HTTP do Express.
- * @returns `Promise<void>`
+ * @returns `Promise<void>` — envia resposta JSON com `{ mensagem, dados }` em caso de sucesso,
+ *   ou `{ mensagem }` com status 500 em caso de erro ao consultar o banco.
  */
 const listarConsultasRealizadas = async (_requisicao: Request, resposta: Response): Promise<void> => {
     try {
